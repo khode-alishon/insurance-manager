@@ -1,9 +1,9 @@
 import json
 
-settings_path = r".\src\settings.json"
+settings_path = r"src\settings.json"
 
 defaults = {
-    "main_bg" : "blue",
+    "main_bg" : "ble",
 }
 
 def change(what, to_what):
@@ -50,4 +50,4 @@ def get(what):
         settings = dict(json.load(settings_file))
         return settings.get(what)
 
-    
+to_default()

@@ -4,7 +4,7 @@ from tkinter import ttk
 
 def main():
     root = tkdnd.Tk()
-
+    root.title("gozaresh")
 
     root.mainloop
 
