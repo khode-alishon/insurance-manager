@@ -27,28 +27,26 @@ def tarafe_get(bime_name_type = "*1", search_argument = "None"):
 
     else:
         #SEARCH BY INT
-        if len(search_argument) == 3 or len(search_argument) == 4:
-            print("SYSTEM CODE")
-            for row in df["System Code"]:
-                if str(row).__contains__(search_argument):
-                    result.append(pd.Index(df["System Code"]).get_loc(row))
+        if len(search_argument) < 3:
+            pass
         else:
-            print("MELLI CODE")
-            for row in df["MelliCode"]:
-                if str(row).__contains__(search_argument):
-                    result.append(pd.Index(df["MelliCode"]).get_loc(row))
+            if len(search_argument) == 3 or len(search_argument) == 4:
+                print("SYSTEM CODE")
+                for row in df["System Code"]:
+                    if str(row).__contains__(search_argument):
+                        result.append(pd.Index(df["System Code"]).get_loc(row))
+            else:
+                print("MELLI CODE")
+                for row in df["MelliCode"]:
+                    if str(row).__contains__(search_argument):
+                        result.append(pd.Index(df["MelliCode"]).get_loc(row))
 
 
     def get(search_index,what):
         return str(df[what].values[search_index])
 
     for index in list(result):
-        try:
-            price = eval(f"{get(index, 'Price')}{bime_name_type}")
-        except:
-            price = eval(f"{get(index, 'Price')}{'*1'}")
-        else:
-            price = eval(f"{get(index, 'Price')}{bime_name_type}")
+        price = f"{get(index, 'Price')}"
 
         return_result.append([get(index,"Name"), price , get(index, "Motekhases"), get(index,"Note")])
 
