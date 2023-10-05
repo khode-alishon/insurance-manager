@@ -1,6 +1,6 @@
 import pandas as pd
 
-def tarafe_get(bime_name_type = "*1", search_argument = "None"):
+def get_tarafe(search_argument = "None"):
 
     result = []
     return_result = []
@@ -15,28 +15,28 @@ def tarafe_get(bime_name_type = "*1", search_argument = "None"):
     index_Motekhases = columns.get_loc("Motekhases")
 
 
-
     try:
         int(search_argument)
+
     except:
         #SEARCH BY STR
-        print("NAME")
         for row in df["Name"]:
             if row.__contains__(search_argument):
                 result.append(pd.Index(df["Name"]).get_loc(row))
 
+
     else:
         #SEARCH BY INT
         if len(search_argument) < 3:
-            pass
+            print("Kamtar")
+            return_result = [["Name", "Price", "Motekhases", "Note"] ,["None", "None", "None", "None"]]
+            return return_result
         else:
             if len(search_argument) == 3 or len(search_argument) == 4:
-                print("SYSTEM CODE")
                 for row in df["System Code"]:
                     if str(row).__contains__(search_argument):
                         result.append(pd.Index(df["System Code"]).get_loc(row))
             else:
-                print("MELLI CODE")
                 for row in df["MelliCode"]:
                     if str(row).__contains__(search_argument):
                         result.append(pd.Index(df["MelliCode"]).get_loc(row))
@@ -45,6 +45,8 @@ def tarafe_get(bime_name_type = "*1", search_argument = "None"):
     def get(search_index,what):
         return str(df[what].values[search_index])
 
+    return_result.append(["Name", "Price", "Motekhases", "Note"])
+
     for index in list(result):
         price = f"{get(index, 'Price')}"
 
@@ -52,6 +54,3 @@ def tarafe_get(bime_name_type = "*1", search_argument = "None"):
 
 
     return return_result
-
-
-

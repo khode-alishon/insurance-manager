@@ -3,22 +3,27 @@ import tkinterDnD as tkdnd
 from tkinter import ttk
 import sys
 sys.path.insert(0,r"classes\modules")
-import tarafe
+from tarafe import get_tarafe
+
+
 
 def main():
+    
     root = tkdnd.Tk()
     root.title("estelaam")
     search_argument = StringVar(root)
 
     def farsi(what):
-        return what.replace("ي", "ی").replace("ك", "ک")
+        return str(what).replace("ي", "ی").replace("ك", "ک")
 
     def search(*args):
         if len(search_argument.get()) < 3:
             pass
         else:
-            mylbl.set(tarafe.tarafe_get(search_argument = farsi(str(search_argument.get())))[0][0] )
-            return tarafe.tarafe_get(search_argument = farsi(str(search_argument.get())))
+            if get_tarafe(farsi(str(search_argument.get())))[0] == "None":
+                mylbl.get("None")
+            else:
+                mylbl.set(get_tarafe(farsi(search_argument.get()))[1][0])
 
     search_argument.trace('w', search)
 

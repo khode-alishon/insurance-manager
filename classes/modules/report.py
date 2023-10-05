@@ -1,3 +1,1 @@
-def bime_shode(name):
-
-    return name
+import pandas as pd

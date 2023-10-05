@@ -1,6 +1,6 @@
 import json
 
-settings_path = r"src\settings.json"
+settings_path = r"src\.settings.json"
 
 defaults = {
     "main_bg" : "ble",
