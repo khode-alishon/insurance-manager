@@ -1,10 +1,23 @@
 {
-    "مهندسی و ساختمان صنایع نفت" : {
+    "225" : {
         "name": "\u0645\u0647\u0646\u062f\u0633\u06cc \u0648 \u0633\u0627\u062e\u062a\u0645\u0627\u0646 \u0635\u0646\u0627\u06cc\u0639 \u0646\u0641\u062a",
         "para_tarafe": "3",
         "shomare_bime_name": "225",
         "dandan_tarafe": "2",
         "dandan_saghf_tajmiei": "150000000",
-        "dandan_sagh_fard": "50000000"
+        "dandan_sagh_fard": "50000000",
+        "orotez_saghf": "5000000",
+        "saghf_eynak": "10000000"
+    },
+    "216":
+    {
+        "name": "خدمات بیمه‌ای امین پارسیان",
+        "para_tarafe": "1",
+        "shomare_bime_name": "216",
+        "dandan_tarafe": "2",
+        "dandan_saghf_tajmiei": "150000000",
+        "dandan_sagh_fard": "50000000",
+        "orotez_saghf": "5000000",
+        "saghf_eynak": "20000000"
     }
 }

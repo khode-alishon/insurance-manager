@@ -1,43 +1,54 @@
 import pandas as pd
 import json
 
-para_file = r"src\para.xlsx"
+
 bime_shode_file = r"src\bime_shode.xlsx"
-bime_name_file = r"src\.bime_name.json"
+bime_name_file = r"src\.all_bime_name_ha.json"
 with open(bime_name_file, "r", encoding="utf8") as f:
-    bime_name = dict(json.load(f))
-para_tarafe = bime_name.get("para_tarafe")
-dandan_tarafe = bime_name.get("dandan_tarafe")
-dandan_saghf_tajmiei = bime_name.get("dandan_saghf_tajmiei")
-dandan_sagh_fard = bime_name.get("dandan_sagh_fard")
-shomare_bime_name = bime_name.get("shomare_bime_name")
-bime_name_name = bime_name.get("name")
-
-df = pd.read_excel(para_file)
+    bime_name_ha = dict(json.load(f))
 
 
+df = pd.read_excel(bime_shode_file)
 
-def get_saghf_dandan(type = "single" ,code_melli_asli = "0000000000", code_personeli_asli = "000000"):
-        if code_melli_asli == "0000000000" and code_personeli_asli == "000000":
-            print("error")
-            return None
+bime_shode_bime_name = str(list(df["شماره بیمه نامه"])[1])
 
-def get_saghf_orotez(type = "single" ,code_melli_asli = "0000000000", code_personeli_asli = "000000"):
-        if code_melli_asli == "0000000000" and code_personeli_asli == "000000":
-            print("error")
-            return None
 
-def get_saghf_eynak(type = "single" ,code_melli_asli = "0000000000", code_personeli_asli = "000000"):
-        if code_melli_asli == "0000000000" and code_personeli_asli == "000000":
-            print("error")
-            return None
+def farsi(what):
+        return str(what).replace("ي", "ی").replace("ك", "ک")
 
-def get_havale(type = "single" ,code_melli_asli = "0000000000", code_personeli_asli = "000000"):
-        if code_melli_asli == "0000000000" and code_personeli_asli == "000000":
-            print("error")
-            return None
+def get_saghf_dandan():
+        if bime_shode_bime_name not in list(bime_name_ha.keys()):
+            return "Error, Bime name not defined"
+        else:
+            saghf_tajmiei_dandan = dict(bime_name_ha.get(bime_shode_bime_name)).get("dandan_saghf_tajmiei")
+            index_dandan = []
+            ind = 0
+            for item in list(df["بیماری"]):
+                 if "دندانپزشکی" in farsi(item):
+                       index_dandan.append(ind)
+                 ind = ind + 1
+            print(index_dandan)
 
-def get_estefade(type = "single" ,code_melli_asli = "0000000000", code_personeli_asli = "000000"):
-        if code_melli_asli == "0000000000" and code_personeli_asli == "000000":
-            print("error")
-            return None
+def get_saghf_orotez():
+        if bime_shode_bime_name not in list(bime_name_ha.keys()):
+            return "Error, Bime name not defined"
+        else:
+            saghf_orotez = dict(bime_name_ha.get(bime_shode_bime_name)).get("orotez_saghf")
+            print(saghf_orotez)
+
+def get_saghf_eynak():
+        if bime_shode_bime_name not in list(bime_name_ha.keys()):
+            return "Error, Bime name not defined"
+        else:
+            saghf_eynak = dict(bime_name_ha.get(bime_shode_bime_name)).get("saghf_eynak")
+            print(saghf_eynak)
+
+def get_havale():
+        if bime_shode_bime_name not in list(bime_name_ha.keys()):
+            return "Error, Bime name not defined"
+
+def get_estefade():
+        if bime_shode_bime_name not in list(bime_name_ha.keys()):
+            return "Error, Bime name not defined"
+
+get_saghf_dandan()
