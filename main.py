@@ -5,18 +5,43 @@ import tkinter as tk
 import tkinter.font as font
 import sys, PIL
 sys.path.insert(0,r"classes\windows")
-import validator, mohasebe, gozaresh,estelaam
+import validator, mohasebe, gozaresh,estelaam, tarafe_window
 
 root_bg = "#222222"
 win_bg = "#353535" 
 win_fg = "#ffffff"
 btn_bg = "#595959"
 
+class MainNavButton(Label):
+    def __init__(self, master,row = 0, column = 0, app = None, **kwargs):
+        super().__init__(master, **kwargs)
+        self.app = app
+        self.config(bg = btn_bg, fg = win_fg, font = "Bnazanin 16 bold")
+        self.grid(row = row, column= column, sticky= NSEW, padx=10, pady = 10)
+        self.bind("<Enter>", self.onhover)
+        self.bind("<Button-1>", self.run)
+
+    def onhover(self, e):
+        pass
+
+
+
+    def run(self, e):
+        global app_window
+        self.tst = self.app.App(window = app_window)
+        try:
+            for child in app_window.winfo_children():
+                child.grid_forget()
+        except:
+            pass
+
+        self.tst.run()
 
 def main():
-    
+    global app_window
+
     def button_hover(e, lbl):
-        print(label["text"])
+        print(lbl["text"])
 
     root = Tk()
     root.rowconfigure(0, weight=1)
@@ -44,25 +69,11 @@ def main():
     app_window.grid(row = 0, column=1, sticky=NSEW, rowspan=5, padx=10, pady = 20)
 
 
-    khesarat_app_label = Label(apps_nav, text = "خسارت", bg = btn_bg, fg = win_fg, font = "Bnazanin 16 bold")
-    khesarat_app_label.grid(row = 0, column=0, sticky= NSEW, padx=10, pady = 10)
-
-    estelaam_app_label = Label(apps_nav, text = "استعلام", bg = btn_bg, fg = win_fg, font = "Bnazanin 16 bold")
-    estelaam_app_label.grid(row = 1, column=0, sticky= NSEW, padx=10, pady = 10)
-
-    tarafe_app_label = Label(apps_nav, text = "تعرفه", bg = btn_bg, fg = win_fg, font = "Bnazanin 16 bold")
-    tarafe_app_label.grid(row = 2, column=0, sticky= NSEW, padx=10, pady = 10)
-
-    file_app_label = Label(apps_nav, text = "بررسی فایل", bg = btn_bg, fg = win_fg, font = "Bnazanin 16 bold")
-    file_app_label.grid(row = 3, column=0, sticky= NSEW, padx=10, pady = 10)
-
-    report_app_label = Label(apps_nav, text = "گزارشات", bg = btn_bg, fg = win_fg, font = "Bnazanin 16 bold")
-    report_app_label.grid(row = 4, column=0, sticky= NSEW, padx=10, pady = 10)
-
-    main_nav_labels = [khesarat_app_label, estelaam_app_label, tarafe_app_label, file_app_label, report_app_label]
-
-    for label in main_nav_labels:
-        label.bind("<Enter>", lambda e: button_hover(e = e, lbl = label))
+    khesarat_app_label = MainNavButton(apps_nav, text = "خسارت", row = 0, column=0, app = mohasebe)
+    estelaam_app_label = MainNavButton(apps_nav, text = "استعلام", row = 1, column=0, app = estelaam)
+    tarafe_app_label = MainNavButton(apps_nav, text = "تعرفه", row = 2, column=0, app = tarafe_window)
+    file_app_label = MainNavButton(apps_nav, text = "بررسی فایل", row = 3, column=0, app = validator)
+    report_app_label = MainNavButton(apps_nav, text = "گزارشات", row = 4, column=0, app = gozaresh)
 
 
     root.mainloop()

@@ -1,13 +1,19 @@
 from tkinter import *
 import tkinterDnD as tkdnd
 from tkinter import ttk
-
-def main():
-    root = tkdnd.Tk()
-    root.title("mohasebe")
-
-    root.mainloop
+import sys
 
 
-if __name__ == "__main__":
-    main
+class App():
+
+    def __init__(self, window = None):
+
+        self.app_frame = Frame(window)
+        self.test_label = Label(self.app_frame, text = "Mohasebe")
+        self.test_label.grid(row = 0, column = 0)
+    
+        
+
+    def run(self): 
+        self.app_frame.grid(row = 0, column = 0)
+
