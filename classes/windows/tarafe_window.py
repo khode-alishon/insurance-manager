@@ -4,7 +4,12 @@ from tkinter import ttk
 import sys
 sys.path.insert(0,r"classes\modules")
 from tarafe import get_tarafe
-import main
+
+
+class TarafeLabel(Label):
+    def __init__(self, master, **kwargs):
+        super.__init__(self, master, kwargs)
+
 
 class App():
 
@@ -22,18 +27,19 @@ class App():
                 pass
             else:
                 if get_tarafe(farsi(str(self.search_argument.get())))[0] == "None":
-                    mylbl.get("None")
+                    print("not found")
                 else:
-                    mylbl.set(get_tarafe(farsi(self.search_argument.get()))[1][0])
+                    #mylbl.set(get_tarafe(farsi(self.search_argument.get()))[1][0])
+                    found = get_tarafe(farsi(self.search_argument.get()))
+                    for i in found:
+                        print(i[0]) 
 
         self.search_argument.trace('w', search)
 
         inp = Entry(self.app_frame, textvariable= self.search_argument)
         inp.pack()
 
-        mylbl = StringVar(self.app_frame)
-        label = Label(self.app_frame, textvariable=mylbl, bg = main.root_bg)
-        label.pack()
+        
 
 
 

@@ -45,12 +45,12 @@ def get_tarafe(search_argument = "None"):
     def get(search_index,what):
         return str(df[what].values[search_index])
 
-    return_result.append(["Name", "Price", "Motekhases", "Note"])
+    return_result.append(["Name", "Price", "Motekhases", "Note", "System Code"])
 
     for index in list(result):
         price = f"{get(index, 'Price')}"
 
-        return_result.append([get(index,"Name"), price , get(index, "Motekhases"), get(index,"Note")])
+        return_result.append([get(index,"Name"), price , get(index, "Motekhases"), get(index,"Note"), get(index, "System Code")])
 
 
     return return_result
